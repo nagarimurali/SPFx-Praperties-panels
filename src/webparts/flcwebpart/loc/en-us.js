@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
+    "PropertyPaneHeading": "SPFx Property Pane Controls",
     "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field",
+    "TexboxFieldLabel": "Texbox Field Label",
     "AppLocalEnvironmentSharePoint": "The app is running on your local environment as SharePoint web part",
     "AppLocalEnvironmentTeams": "The app is running on your local environment as Microsoft Teams app",
     "AppLocalEnvironmentOffice": "The app is running on your local environment in office.com",

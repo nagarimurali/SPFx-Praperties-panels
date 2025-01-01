@@ -1,7 +1,7 @@
 declare interface IFlcwebpartWebPartStrings {
-  PropertyPaneDescription: string;
+  PropertyPaneHeading: string;
   BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  TexboxFieldLabel: string;
   AppLocalEnvironmentSharePoint: string;
   AppLocalEnvironmentTeams: string;
   AppLocalEnvironmentOffice: string;

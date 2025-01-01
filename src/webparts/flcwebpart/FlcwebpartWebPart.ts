@@ -3,7 +3,16 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneButton,
+  PropertyPaneCheckbox,
+  PropertyPaneChoiceGroup,
+  PropertyPaneDropdown,
+  PropertyPaneHorizontalRule,
+  PropertyPaneLabel,
+  PropertyPaneLink,
+  PropertyPaneSlider,
+  PropertyPaneTextField,
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
@@ -14,6 +23,15 @@ import { IFlcwebpartProps } from './components/IFlcwebpartProps';
 
 export interface IFlcwebpartWebPartProps {
   description: string;
+  textField: string;
+  multiLineTextField: string;
+  linkField: string;
+  dropdownField: string;
+  choiceGroupField: string;
+  sliderField: number;
+  toggleField: boolean;
+  checkboxField: boolean;
+  buttonField: string;
 }
 
 export default class FlcwebpartWebPart extends BaseClientSideWebPart<IFlcwebpartWebPartProps> {
@@ -29,7 +47,19 @@ export default class FlcwebpartWebPart extends BaseClientSideWebPart<IFlcwebpart
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        textField: this.properties.textField,
+        multiLineTextField: this.properties.multiLineTextField,
+        linkField: this.properties.linkField,
+        sliderField: this.properties.sliderField,
+        dropdownField: this.properties.dropdownField,
+        choiceGroupField: this.properties.choiceGroupField,
+        toggleField: this.properties.toggleField,
+        checkboxField: this.properties.checkboxField,
+        buttonField: this.properties.buttonField
+        
+     
+        
       }
     );
 
@@ -102,19 +132,82 @@ export default class FlcwebpartWebPart extends BaseClientSideWebPart<IFlcwebpart
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            image: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+            description: strings.PropertyPaneHeading
+
           },
           groups: [
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
+                PropertyPaneTextField('textField', {
+                  label: strings.TexboxFieldLabel
+                }),
+                PropertyPaneTextField('multiLineTextField', {
+                  label: 'Multi-line Text Field',
+                  multiline: true
+                }),
+                PropertyPaneLink('linkField', {
+                  text: 'Example Link',
+                  href: 'https://www.example.com'
+                }),
+                PropertyPaneDropdown('dropdownField', {
+                  label: 'Dropdown',
+                  options: [
+                    { key: 'Option1', text: 'Option 1' },
+                    { key: 'Option2', text: 'Option 2' }
+                  ]
+                }),
+                PropertyPaneChoiceGroup('choiceGroupField', {
+                  label: 'Choice Group',
+                  options: [
+                    { key: 'A', text: 'Option A' },
+                    { key: 'B', text: 'Option B' }
+                  ]
+                }),
+                PropertyPaneSlider('sliderField', {
+                  label: 'Slider',
+                  min: 0,
+                  max: 100
+                }),
+                PropertyPaneToggle('toggleField', {
+                  label: 'Toggle'
+                }),
+                PropertyPaneCheckbox('checkboxField', {
+                  text: 'Checkbox'
+                }),
+                PropertyPaneButton('buttonField', {
+                  text: 'Button',
+                  onClick: () => alert('Button clicked!')
+                }),
+                PropertyPaneHorizontalRule()
               ]
             }
           ]
-        }
+        },
+        {
+          header: {
+            description: "My Web Part Configuration Page 2"
+          },
+          groups: [
+            {
+              groupName: "Basic Settings 2",
+              groupFields: [
+                PropertyPaneLabel('labelField2', {
+                  text: 'This is a label'
+                }),
+                PropertyPaneTextField('textField2', {
+                  label: 'Text Field'
+                }),
+                PropertyPaneTextField('multiLineTextField2', {
+                  label: 'Multi-line Text Field',
+                  multiline: true
+                }),
+                PropertyPaneHorizontalRule()
+              ]
+            }
+          ]
+        } 
       ]
     };
   }
